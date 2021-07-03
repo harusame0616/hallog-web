@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+    web:
+        image: harusame0616/hallog-web-dev
+        ports:
+            - 3010:3000
+        volumes:
+            - ./web/project:/project
+            - web-node_modules:/project/node_modules
+
+volumes:
+    web-node_modules:
