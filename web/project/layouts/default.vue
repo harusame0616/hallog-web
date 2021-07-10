@@ -5,17 +5,15 @@
         <v-container>
           <v-row>
             <v-col>
-              <v-img
-                src="logo.png"
-                contain
-                min-width="300"
-                max-width="480"
-                class="ml-n3"
-              />
+              <img src="logo.png" contain class="logo" />
             </v-col>
           </v-row>
-          <v-row style="margin-top: -64px" class="menu"
-            ><v-col> HELLO >> HOME | WORK | PROFILE </v-col>
+          <v-row class="menu"
+            ><v-col>
+              HELLO >> <nuxt-link to="/">HOME</nuxt-link> |
+              <nuxt-link to="/work">WORK</nuxt-link> |
+              <nuxt-link to="/profile">PROFILE</nuxt-link>
+            </v-col>
           </v-row>
         </v-container>
       </header>
@@ -49,8 +47,18 @@ export default {
   height: 100%;
 
   .header {
-    margin-bottom: 1rem;
+    border-bottom: rgb(189, 189, 189) 1px solid;
+    padding-bottom: 1rem;
+    box-shadow: 2px 2px 4px black;
+
+    .logo {
+      margin-left: -8px;
+      width: 100%;
+      min-width: 300px;
+      max-width: 480px;
+    }
     .menu {
+      margin-top: -64px;
       font-family: 'Barlow Condensed', sans-serif;
     }
   }

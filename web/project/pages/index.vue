@@ -6,38 +6,46 @@
         <div class="text">{{ list.label }}</div>
         <div class="line after" />
       </div>
-      <div :key="list.label + 'list'" class="list">
-        <div
+      <v-row :key="list.label + 'list'" class="list">
+        <v-col
           v-for="article in list.articles"
           :key="article.id"
           class="item-holder"
         >
           <div class="eye-catch">
-            <v-img
-              :src="article.imageUrl || 'no-image.svg'"
-              width="240"
-              height="240"
-              class="image"
-            />
+            <nuxt-link :to="`/articles/${article.id}`" class="link">
+              <v-img
+                :src="article.imageUrl || 'no-image.svg'"
+                width="240"
+                height="240"
+                class="image"
+                :to="`/articles/${article.id}`"
+              />
+            </nuxt-link>
             <div class="publish">{{ article.publish }}</div>
           </div>
-          <div class="article-title">{{ article.title }}</div>
+          <div class="article-title">
+            <nuxt-link :to="`/articles/${article.id}`" class="link">{{
+              article.title
+            }}</nuxt-link>
+          </div>
           <div class="tags">
             <v-chip
               v-for="tag in article.tags"
               :key="tag"
               x-small
               class="tag"
+              :to="`/articles/?${tag}`"
               >{{ tag }}</v-chip
             >
           </div>
-        </div>
-      </div>
+        </v-col>
+      </v-row>
     </template>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data: () => ({
     lists: [],
@@ -57,8 +65,8 @@ export default {
   mounted() {
     const article = {
       id: 'article-id',
-      title: 'TypeScriptの夢を見る',
-      tags: ['TypeScript', 'Web', 'test-tag'],
+      title: 'TypeScriptの夢を見る------------------------',
+      tags: ['TypeScript', 'Web', 'test-tag', '長めのタグのやつ'],
       publish: '2021/06/01',
       imageUrl: undefined,
     };
@@ -90,6 +98,7 @@ export default {
       &.pre {
         width: 2rem;
       }
+
       &.after {
         flex-grow: 1;
       }
@@ -99,6 +108,7 @@ export default {
   .list {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 4rem;
 
     .item-holder {
       width: 240px;
@@ -130,15 +140,18 @@ export default {
       .tags {
         display: flex;
         flex-wrap: wrap;
+        width: 240px;
 
         .tag {
           margin-right: 0.3rem;
+          margin-bottom: 0.5rem;
         }
       }
 
       .article-title {
         font-family: 'M PLUS Rounded 1c', sans-serif;
         font-weight: bold;
+        width: 240px;
       }
     }
   }
