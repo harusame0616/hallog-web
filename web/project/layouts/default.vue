@@ -19,7 +19,19 @@
       </header>
       <section class="contents">
         <v-container>
-          <nuxt />
+          <v-row>
+            <v-col cols="12" md="10">
+              <nuxt />
+            </v-col>
+            <v-col col="12" md="2">
+              <div>
+                <div class="title">Nemoto Masaharu({{ age }})</div>
+                <div class="photo"></div>
+                <div class="comment"></div>
+                <div class="comment"></div>
+              </div>
+            </v-col>
+          </v-row>
         </v-container>
       </section>
       <footer class="footer"></footer>
@@ -28,6 +40,8 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
+
 export default {
   head: {
     link: [
@@ -36,6 +50,9 @@ export default {
         href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,500&display=swap',
       },
     ],
+  },
+  computed: {
+    age: () => dayjs().diff(dayjs('1989-6-16'), 'year'),
   },
 };
 </script>
